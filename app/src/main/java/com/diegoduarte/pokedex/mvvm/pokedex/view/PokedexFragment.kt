@@ -54,7 +54,7 @@ class PokedexFragment : DaggerFragment() {
         binding.pokedexList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (!viewModel.loading && manager.findLastVisibleItemPosition() >= manager.itemCount - 11) {
+                if (!viewModel.loading && manager.findLastVisibleItemPosition() >= manager.itemCount - 9) {
                     viewModel.nextPage()
                 }
             }

@@ -15,6 +15,9 @@ data class Type(
         "poison"-> R.color.purple
         "ground"-> R.color.brown
         "rock"->R.color.gray
+        "ghost"-> R.color.purple
+        "dark"-> R.color.gray
+        "fairy"-> R.color.pink
         else -> R.color.blue
     }
 }
