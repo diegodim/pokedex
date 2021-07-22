@@ -4,7 +4,7 @@
     <data>
         <variable
             name="pokemon"
-            type="com.diegoduarte.pokedex.data.domain.model.Pokemon" />
+            type="com.diegoduarte.pokedex.data.model.Pokemon" />
     </data>
 
 

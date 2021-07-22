@@ -38,7 +38,7 @@ class PokedexViewModel @Inject constructor(val repository: PokedexRepository):
     }
 
     private fun refreshPokemon(offset: Int, limit: Int){
-        refreshData.invoke(
+        refreshData(
             RefreshData.Params(offset, limit),
             onSuccess = {
                         loading = false

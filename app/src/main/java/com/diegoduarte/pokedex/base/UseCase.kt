@@ -9,7 +9,7 @@ abstract class UseCase<T, in Params>(private val scope: CoroutineScope) {
 
     abstract fun run(params: Params? = null): Flow<T>
 
-    fun invoke(params: Params,
+    operator fun invoke(params: Params,
                onSuccess: (T) -> Unit = {},
                onError: ((Throwable) -> Unit) = {}
                 ){
