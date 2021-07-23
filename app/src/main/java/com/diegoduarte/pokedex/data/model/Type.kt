@@ -16,7 +16,7 @@ data class Type(
         "ground"-> R.color.brown
         "rock"->R.color.gray
         "ghost"-> R.color.purple
-        "dark"-> R.color.gray
+        "dark"-> R.color.purple
         "fairy"-> R.color.pink
         else -> R.color.blue
     }
