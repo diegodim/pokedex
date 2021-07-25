@@ -26,6 +26,12 @@ class PokedexViewModel @Inject constructor(repository: PokedexRepository):
     val status: LiveData<ApiStatus>
         get() = _status
 
+    private val _navigateToSelectedPokemon = MutableLiveData<Pokemon?>()
+
+    // The external immutable LiveData for the navigation property
+    val navigateToSelectedPokemon: LiveData<Pokemon?>
+        get() = _navigateToSelectedPokemon
+
     init {
         _offset = 0
         _limit = 20
@@ -53,6 +59,14 @@ class PokedexViewModel @Inject constructor(repository: PokedexRepository):
     fun statusDone(){
         loading = false
         _status.value = ApiStatus.DONE
+    }
+
+    fun displayPokemon(pokemon: Pokemon){
+        _navigateToSelectedPokemon.value = pokemon
+    }
+
+    fun displayPokemonComplete(){
+        _navigateToSelectedPokemon.value = null
     }
 
 }

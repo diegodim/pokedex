@@ -1,6 +1,6 @@
 package com.diegoduarte.pokedex.data.source.remote.mapper
 
-interface  BaseRemoteMapper<R, D> {
+interface  BaseRemoteMapper<in R, out D> {
 
     fun toDomain(remote: R): D
 

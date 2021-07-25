@@ -39,7 +39,8 @@ class ApplicationModule{
             context.applicationContext,
             PokedexDatabase::class.java,
             "Pokedex.db"
-        ).build()
+        ).fallbackToDestructiveMigration()
+            .build()
     }
 
 }

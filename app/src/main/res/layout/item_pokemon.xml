@@ -24,7 +24,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/pokemon_name"
+                android:id="@+id/pokemon_item_name"
                 style="@style/Theme.TextView.Name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -32,29 +32,29 @@
                 android:layout_marginTop="@dimen/spacing_small"
                 android:singleLine="true"
                 android:textIsSelectable="false"
-                app:layout_constraintEnd_toStartOf="@+id/pokemon_id"
+                app:layout_constraintEnd_toStartOf="@+id/pokemon_item_id"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:nameText="@{pokemon.name}"
                 tools:text="Pokemon" />
 
             <TextView
-                android:id="@+id/pokemon_id"
+                android:id="@+id/pokemon_item_id"
                 style="@style/Theme.TextView.Id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_small"
                 android:layout_marginEnd="@dimen/spacing_small"
+                android:textIsSelectable="false"
                 app:idText="@{pokemon.id}"
-                app:layout_constraintBaseline_toBaselineOf="@+id/pokemon_name"
+                app:layout_constraintBaseline_toBaselineOf="@+id/pokemon_item_name"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/pokemon_name"
-                tools:text="#0000"
-                android:textIsSelectable="false" />
+                app:layout_constraintStart_toEndOf="@+id/pokemon_item_name"
+                tools:text="#0000" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/pokeball_image"
-                style="@style/Theme.ImageView.Pokemon"
+                style="@style/Theme.ImageView.Pokeball"
                 android:layout_width="@dimen/spacing_huge"
                 android:layout_height="@dimen/spacing_huge"
                 android:contentDescription="@string/content_pokeball_image"
@@ -62,11 +62,10 @@
                 android:scaleY="1.7"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/pokeball"
-                app:tint="@color/white" />
+                app:srcCompat="@drawable/pokeball" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/pokemon_image"
+                android:id="@+id/pokemon_item_image"
                 android:layout_width="@dimen/spacing_huge"
                 android:layout_height="@dimen/spacing_huge"
                 android:layout_marginTop="@dimen/spacing_normal"
@@ -78,29 +77,29 @@
                 app:imageUrl="@{pokemon.id}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pokemon_name"
+                app:layout_constraintTop_toBottomOf="@+id/pokemon_item_name"
                 tools:src="@drawable/poke0001" />
 
             <TextView
-                android:id="@+id/pokemon_type_2"
+                android:id="@+id/pokemon_item_type2"
                 style="@style/Theme.TextView.Type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/pokemon_name"
+                app:layout_constraintStart_toStartOf="@+id/pokemon_item_name"
                 app:type2Text="@{pokemon}"
                 tools:text="Poison"
                 android:textIsSelectable="false" />
 
             <TextView
-                android:id="@+id/pokemon_type_1"
+                android:id="@+id/pokemon_item_type1"
                 style="@style/Theme.TextView.Type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_small"
-                app:layout_constraintBottom_toTopOf="@+id/pokemon_type_2"
-                app:layout_constraintStart_toStartOf="@+id/pokemon_name"
+                app:layout_constraintBottom_toTopOf="@+id/pokemon_item_type2"
+                app:layout_constraintStart_toStartOf="@+id/pokemon_item_name"
                 app:type1Text="@{pokemon}"
                 tools:text="Grass"
                 android:textIsSelectable="false" />

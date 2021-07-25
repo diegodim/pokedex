@@ -9,5 +9,23 @@
         android:id="@+id/pokedexFragment"
         android:name="com.diegoduarte.pokedex.mvvm.pokedex.view.PokedexFragment"
         android:label="fragment_pokedex"
-        tools:layout="@layout/fragment_pokedex" />
+        tools:layout="@layout/fragment_pokedex" >
+        <action
+            android:id="@+id/action_pokedexFragment_to_pokemonFragment"
+            app:destination="@id/pokemonFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/pokedexFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokemonFragment"
+        android:name="com.diegoduarte.pokedex.mvvm.pokemon.view.fragment.PokemonFragment"
+        android:label="PokemonFragment" >
+        <argument
+            android:name="pokemon"
+            app:argType="com.diegoduarte.pokedex.data.model.Pokemon" />
+    </fragment>
 </navigation>

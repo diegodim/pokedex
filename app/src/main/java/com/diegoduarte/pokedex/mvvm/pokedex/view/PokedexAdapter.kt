@@ -8,14 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.diegoduarte.pokedex.data.model.Pokemon
 import com.diegoduarte.pokedex.databinding.ItemPokemonBinding
 
-class PokedexAdapter:
+class PokedexAdapter( val onClickListener: OnClickListener ):
     ListAdapter<Pokemon, PokedexAdapter.PokemonViewHolder>(PokemonDiffCallback)  {
 
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        val item = getItem(position)
-
-        holder.bind(item)
+        val pokemon = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(pokemon)
+        }
+        holder.bind(pokemon)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
@@ -47,6 +49,10 @@ class PokedexAdapter:
         override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
             return oldItem.id == newItem.id
         }
+    }
+
+    class OnClickListener(val clickListener: (marsProperty:Pokemon) -> Unit) {
+        fun onClick(marsProperty:Pokemon) = clickListener(marsProperty)
     }
 }
 

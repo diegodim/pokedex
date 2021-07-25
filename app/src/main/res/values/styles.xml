@@ -4,11 +4,15 @@
     <style name="Theme.TextView.Name" parent="android:TextAppearance">
         <item name="android:fontFamily">@font/roboto_black</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/font_large</item>
+        <item name="android:textSize">@dimen/font_normal</item>
+    </style>
+
+    <style name="Theme.TextView.Content" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/font_tiny</item>
     </style>
 
     <style name="Theme.CardView" parent="Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">@dimen/spacing_small</item>
+        <item name="cardCornerRadius">@dimen/spacing_small</item>+
     </style>
 
     <style name="Theme.TextView.Id" parent="android:TextAppearance">
@@ -18,10 +22,11 @@
         <item name="android:textSize">@dimen/font_normal</item>
     </style>
 
-    <style name="Theme.ImageView.Pokemon" parent="Theme.MaterialComponents">
+    <style name="Theme.ImageView.Pokeball" parent="Theme.MaterialComponents">
         <item name="android:adjustViewBounds">true</item>
         <item name="android:alpha">0.40</item>
         <item name="android:scaleType">centerCrop</item>
+        <item name="android:tint">@color/white</item>
     </style>
 
     <style name="Theme.TextView.Type" parent="android:TextAppearance">
@@ -32,12 +37,25 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/font_small</item>
     </style>
-
-    <style name="AppTheme.Title.Collapsed" parent="android:TextAppearance">
-        <item name="android:textSize">20sp</item>
+    <style name="Theme.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">@color/black_40</item>
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="android:fontFamily">@font/roboto_black</item>
+    </style>
+    <style name="Theme.CollapsingToolbar.Collapsed.Background" parent="Theme.CollapsingToolbar.Collapsed">
+        <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="AppTheme.Title.Expanded" parent="android:TextAppearance">
-        <item name="android:textSize">48sp</item>
+
+    <style name="Theme.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/black_40</item>
+        <item name="fontFamily">@font/roboto_black</item>
+        <item name="android:fontFamily">@font/roboto_black</item>
     </style>
+
+    <style name="Theme.CollapsingToolbar.Expanded.Background" parent="Theme.CollapsingToolbar.Expanded">
+        <item name="android:textSize">@dimen/font_larger</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

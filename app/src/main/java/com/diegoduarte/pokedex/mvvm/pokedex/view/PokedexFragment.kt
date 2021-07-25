@@ -1,5 +1,6 @@
 package com.diegoduarte.pokedex.mvvm.pokedex.view
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diegoduarte.pokedex.R
@@ -37,7 +39,9 @@ class PokedexFragment : DaggerFragment() {
         binding.pokedexList.setHasFixedSize(true)
         binding.pokedexList.setItemViewCacheSize(8)
         val manager = binding.pokedexList.layoutManager as GridLayoutManager
-        val adapter = PokedexAdapter()
+        val adapter = PokedexAdapter( PokedexAdapter.OnClickListener{
+            viewModel.displayPokemon(it)
+        })
         binding.pokedexList.adapter = adapter
 
         viewModel.pokemonList.observe(viewLifecycleOwner, { list->
@@ -47,9 +51,7 @@ class PokedexFragment : DaggerFragment() {
                     viewModel.statusDone()
                 }
             }
-
         })
-
 
         binding.pokedexList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -57,6 +59,15 @@ class PokedexFragment : DaggerFragment() {
                 if (!viewModel.loading && manager.findLastVisibleItemPosition() >= manager.itemCount - 9) {
                     viewModel.nextPage()
                 }
+            }
+        })
+
+        viewModel.navigateToSelectedPokemon.observe(viewLifecycleOwner,  {
+            if ( null != it ) {
+                // Must find the NavController from the Fragment
+                this.findNavController().navigate(PokedexFragmentDirections.actionPokedexFragmentToPokemonFragment(it))
+                // Tell the ViewModel we've made the navigate call to prevent multiple navigation
+                viewModel.displayPokemonComplete()
             }
         })
         return binding.root

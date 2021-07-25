@@ -1,6 +1,7 @@
 package com.diegoduarte.pokedex.mvvm.pokedex.view
 
 
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,6 +16,7 @@ import com.diegoduarte.pokedex.R
 import com.diegoduarte.pokedex.data.model.Pokemon
 import com.diegoduarte.pokedex.utils.ApiStatus
 import com.diegoduarte.pokedex.utils.toUpperCase
+import com.google.android.material.appbar.CollapsingToolbarLayout
 
 
 @BindingAdapter("listData")
@@ -28,7 +30,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Pokemon>?) {
 
 
 @BindingAdapter("imageUrl")
-fun bindItemImage(imgView: ImageView, id: Int) {
+fun bindImage(imgView: ImageView, id: Int) {
     id.let {
         val imgUrl = imgView.context.getString(R.string.url_image, it)
 
@@ -42,29 +44,47 @@ fun bindItemImage(imgView: ImageView, id: Int) {
 }
 
 @BindingAdapter("nameText")
-fun TextView.bindItemTextTitle(name: String) {
+fun TextView.bindTextTitle(name: String) {
     name.let {
         text = toUpperCase(it)
     }
 }
 
 @BindingAdapter("idText")
-fun TextView.bindItemTextId(id: Int) {
+fun TextView.bindTextId(id: Int) {
     id.let {
         text = "#"+it.toString().padStart(4,'0')
     }
 }
 
 @BindingAdapter("colorCardView")
-fun bindItemCardView(cardView: CardView, pokemon: Pokemon) {
+fun bindColorCardView(cardView: CardView, pokemon: Pokemon) {
     pokemon.types[0].type.color.let {
         cardView.setCardBackgroundColor(cardView.context.getColor(it))
 
     }
 }
+@BindingAdapter("colorView")
+fun bindColorView(view: View, pokemon: Pokemon) {
+    pokemon.types[0].type.color.let {
+        view.setBackgroundColor(view.context.getColor(it))
+
+    }
+}
+
+@BindingAdapter("colorContent")
+fun bindContent(view: CollapsingToolbarLayout, pokemon: Pokemon) {
+    pokemon.name.let {
+        view.title = toUpperCase(it)
+    }
+    pokemon.types[0].type.color.let {
+        view.setContentScrimColor( view.context.getColor(it))
+
+    }
+}
 
 @BindingAdapter("type1Text")
-fun TextView.bindItemTextType1(pokemon: Pokemon) {
+fun TextView.bindTextType1(pokemon: Pokemon) {
     pokemon.types.let { types ->
         if (types.isNotEmpty()) {
             text = toUpperCase(types[0].type.name)
@@ -75,7 +95,7 @@ fun TextView.bindItemTextType1(pokemon: Pokemon) {
 }
 
 @BindingAdapter("type2Text")
-fun TextView.bindItemTextType2(pokemon: Pokemon) {
+fun TextView.bindTextType2(pokemon: Pokemon) {
     pokemon.types.let { types ->
         if (types.size >= 2) {
             text = toUpperCase(types[1].type.name)

@@ -10,6 +10,10 @@ import com.diegoduarte.pokedex.data.source.local.database.DataConverter
 data class PokemonEntity(
     @PrimaryKey
     val id: Int,
+    val height: Int,
+    val weight: Int,
+    val baseExperience: Int,
     val name: String,
-    val types: MutableList<TypesEntity>
+    val types: MutableList<TypesEntity>,
+    var liked: Boolean = false
 )

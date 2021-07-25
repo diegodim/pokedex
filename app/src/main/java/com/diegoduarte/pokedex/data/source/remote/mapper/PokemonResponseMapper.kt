@@ -10,6 +10,9 @@ class PokemonResponseMapper: BaseRemoteMapper<PokemonResponse, Pokemon> {
     override  fun toDomain(remote: PokemonResponse) = Pokemon(
             id = remote.id,
             name = remote.name,
+            height = remote.height,
+            weight = remote.weight,
+            baseExperience = remote.baseExperience,
             types =  TypesResponseMapper().toDomain(remote.types)
         )
 

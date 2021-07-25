@@ -4,6 +4,7 @@ import android.content.Context
 import com.diegoduarte.pokedex.base.BaseApplication
 import com.diegoduarte.pokedex.di.module.ApplicationModule
 import com.diegoduarte.pokedex.di.module.PokedexModule
+import com.diegoduarte.pokedex.di.module.PokemonModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -15,7 +16,8 @@ import javax.inject.Singleton
     modules = [
         ApplicationModule::class,
         AndroidSupportInjectionModule::class,
-        PokedexModule::class
+        PokedexModule::class,
+        PokemonModule::class
     ]
 )
 interface ApplicationComponent : AndroidInjector<BaseApplication> {

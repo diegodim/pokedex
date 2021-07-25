@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="pokemon"
+            type="com.diegoduarte.pokedex.data.model.Pokemon" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/pokemon_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/pokemon_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="345dp"
+            android:background="@color/green"
+            android:fitsSystemWindows="true"
+            android:theme="@style/Theme.PokeDex.AppBarOverlay"
+            app:colorView="@{pokemon}"
+            app:elevation="0dp">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/pokemon_collapse_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:collapsedTitleTextAppearance="@style/Theme.CollapsingToolbar.Collapsed.Background"
+                app:colorContent="@{pokemon}"
+                app:expandedTitleGravity="top|start"
+                app:expandedTitleMarginStart="@dimen/spacing_normal"
+                app:expandedTitleMarginTop="@dimen/spacing_huge"
+                app:expandedTitleTextAppearance="@style/Theme.CollapsingToolbar.Expanded.Background"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="?attr/actionBarSize"
+                    android:fitsSystemWindows="true">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/pokeball_image"
+                        style="@style/Theme.ImageView.Pokeball"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleX="1.15"
+                        android:scaleY="1.15"
+                        android:src="@drawable/pokeball"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/pokemon_image"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:src="@drawable/poke0001"
+                        app:imageUrl="@{pokemon.id}"
+                        app:layout_constraintBottom_toBottomOf="@+id/pokeball_image"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/pokemon_id"
+                        style="@style/Theme.TextView.Id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="64dp"
+                        android:layout_marginEnd="16dp"
+                        android:alpha="1"
+                        android:textColor="@color/white"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/font_large"
+                        app:idText="@{pokemon.id}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="#0001" />
+
+                    <TextView
+                        android:id="@+id/pokemon_type1"
+                        style="@style/Theme.TextView.Type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/font_normal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/pokemon_id"
+                        app:type1Text="@{pokemon}"
+                        tools:text="Grass" />
+
+                    <TextView
+                        android:id="@+id/pokemon_type2"
+                        style="@style/Theme.TextView.Type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textIsSelectable="false"
+                        android:textSize="@dimen/font_normal"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/pokemon_type1"
+                        app:layout_constraintStart_toEndOf="@+id/pokemon_type1"
+                        app:type2Text="@{pokemon}"
+                        tools:text="Poison" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/pokemon_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginBottom="?attr/actionBarSize"
+                    app:contentInsetStart="0dp"
+                    app:elevation="0dp"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/Theme.PokeDex.PopupOverlay" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/pokemon_tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/background_top_corner"
+                    app:tabGravity="start"
+                    app:tabIndicatorColor="@color/black_40"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="@color/black"
+                    app:tabTextAppearance="@style/Theme.TextView.Content" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/pokemon_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+
