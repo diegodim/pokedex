@@ -7,6 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface PokedexRepository {
 
-    fun refreshPokemonList(offset: Int, limit: Int): Flow<Result<Boolean>>
+    fun refreshPokemonList(): Flow<Result<Boolean>>
     val listPokemon: LiveData<List<Pokemon>>
 }

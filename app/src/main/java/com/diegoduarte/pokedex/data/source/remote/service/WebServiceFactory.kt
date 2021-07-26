@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 
 object WebServiceFactory {
-    private val BASE_URL = "https://pokeapi.co/api/v2/"
+    private val BASE_URL = "https://app.pokemon-api.xyz/"
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
@@ -19,7 +19,7 @@ object WebServiceFactory {
     private fun provideOkHttpClient(): OkHttpClient {
 
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BASIC
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         return OkHttpClient.Builder()
             .retryOnConnectionFailure(true)

@@ -14,5 +14,5 @@ interface PokedexDao {
     fun getPokemonList(): LiveData<List<PokemonEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg videos: PokemonEntity)
+    fun insertAll(vararg pokemon: PokemonEntity)
 }

@@ -15,9 +15,7 @@ class PokedexViewModel @Inject constructor(repository: PokedexRepository):
 
 
     private val refreshData = RefreshData(repository, viewModelScope)
-    private var _offset: Int
-    private var _limit: Int
-    var loading: Boolean
+
 
     val pokemonList = repository.listPokemon
     // The internal MutableLiveData that stores the status of the most recent request
@@ -33,31 +31,21 @@ class PokedexViewModel @Inject constructor(repository: PokedexRepository):
         get() = _navigateToSelectedPokemon
 
     init {
-        _offset = 0
-        _limit = 20
-        loading = true
         _status.value = ApiStatus.LOADING
-        refreshPokemon(_offset, _limit)
+        refreshPokemon()
     }
 
-    private fun refreshPokemon(offset: Int, limit: Int){
-        loading = true
+    private fun refreshPokemon(){
+
         refreshData(
-            RefreshData.Params(offset, limit),
-            onSuccess = { _status.value = ApiStatus.DONE },
-            onError = { loading = false }
+            null,
+            onSuccess = {  },
+            onError = {  }
         )
     }
 
 
-
-    fun nextPage(){
-        _offset = pokemonList.value!!.size
-        refreshPokemon(_offset, _limit)
-    }
-
     fun statusDone(){
-        loading = false
         _status.value = ApiStatus.DONE
     }
 

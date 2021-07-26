@@ -1,7 +1,7 @@
 package com.diegoduarte.pokedex.mvvm.pokedex.view
 
 
-import android.graphics.drawable.Drawable
+
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -32,15 +32,15 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Pokemon>?) {
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, id: Int) {
     id.let {
-        val imgUrl = imgView.context.getString(R.string.url_image, it)
-
+        val url = imgView.context.getString(R.string.url_image, it)
         Glide.with(imgView.context)
-            .load(imgUrl)
+            .load(url)
             .centerInside()
             .set(Downsampler.DECODE_FORMAT, DecodeFormat.PREFER_RGB_565)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(imgView)
     }
+
 }
 
 @BindingAdapter("nameText")
@@ -53,20 +53,20 @@ fun TextView.bindTextTitle(name: String) {
 @BindingAdapter("idText")
 fun TextView.bindTextId(id: Int) {
     id.let {
-        text = "#"+it.toString().padStart(4,'0')
+        text = this.context.getString(R.string.display_id,it.toString().padStart(3,'0'))
     }
 }
 
 @BindingAdapter("colorCardView")
 fun bindColorCardView(cardView: CardView, pokemon: Pokemon) {
-    pokemon.types[0].type.color.let {
+    pokemon.color.let {
         cardView.setCardBackgroundColor(cardView.context.getColor(it))
 
     }
 }
 @BindingAdapter("colorView")
 fun bindColorView(view: View, pokemon: Pokemon) {
-    pokemon.types[0].type.color.let {
+    pokemon.color.let {
         view.setBackgroundColor(view.context.getColor(it))
 
     }
@@ -74,10 +74,10 @@ fun bindColorView(view: View, pokemon: Pokemon) {
 
 @BindingAdapter("colorContent")
 fun bindContent(view: CollapsingToolbarLayout, pokemon: Pokemon) {
-    pokemon.name.let {
+    pokemon.name!!.english.let {
         view.title = toUpperCase(it)
     }
-    pokemon.types[0].type.color.let {
+    pokemon.color.let {
         view.setContentScrimColor( view.context.getColor(it))
 
     }
@@ -85,9 +85,9 @@ fun bindContent(view: CollapsingToolbarLayout, pokemon: Pokemon) {
 
 @BindingAdapter("type1Text")
 fun TextView.bindTextType1(pokemon: Pokemon) {
-    pokemon.types.let { types ->
+    pokemon.type?.let { types ->
         if (types.isNotEmpty()) {
-            text = toUpperCase(types[0].type.name)
+            text = toUpperCase(types[0])
             visibility = View.VISIBLE
 
         } else visibility = View.GONE
@@ -96,9 +96,9 @@ fun TextView.bindTextType1(pokemon: Pokemon) {
 
 @BindingAdapter("type2Text")
 fun TextView.bindTextType2(pokemon: Pokemon) {
-    pokemon.types.let { types ->
+    pokemon.type?.let { types ->
         if (types.size >= 2) {
-            text = toUpperCase(types[1].type.name)
+            text = toUpperCase(types[1])
             visibility = View.VISIBLE
 
         } else visibility = View.GONE

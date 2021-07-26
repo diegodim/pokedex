@@ -2,11 +2,17 @@ package com.diegoduarte.pokedex.data.source.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.diegoduarte.pokedex.data.source.local.entities.PokemonEntity
-import com.diegoduarte.pokedex.data.source.local.entities.TypeEntity
-import com.diegoduarte.pokedex.data.source.local.entities.TypesEntity
+import androidx.room.TypeConverters
+import com.diegoduarte.pokedex.data.source.local.entities.*
 
-@Database(entities = [TypeEntity::class, TypesEntity::class, PokemonEntity::class], version = 4, exportSchema = false)
+@Database(entities = [
+    EvolutionEntity::class,
+    NameEntity::class,
+    ProfileEntity::class,
+    StatsEntity::class,
+    PokemonEntity::class
+], version = 3, exportSchema = false)
+@TypeConverters(DataConverter::class)
 abstract class PokedexDatabase: RoomDatabase() {
 
     abstract fun pokemonDao(): PokedexDao

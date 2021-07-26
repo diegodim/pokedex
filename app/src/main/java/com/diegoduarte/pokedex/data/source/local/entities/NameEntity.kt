@@ -3,8 +3,8 @@ package com.diegoduarte.pokedex.data.source.local.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "type")
-data class TypeEntity(
+@Entity(tableName = "name")
+data class NameEntity(
     @PrimaryKey
-    val name: String
+    val english: String
 )

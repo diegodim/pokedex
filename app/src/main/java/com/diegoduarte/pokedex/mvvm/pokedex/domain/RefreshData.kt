@@ -7,13 +7,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 
 class RefreshData(val repository: PokedexRepository, scope: CoroutineScope):
-    UseCase<Result<Boolean>, RefreshData.Params>(scope) {
+    UseCase<Result<Boolean>, Void?>(scope) {
 
-
-    data class Params constructor(val offset: Int,
-                                  val limit: Int)
-
-    override fun run(params: Params?): Flow<Result<Boolean>> {
-        return repository.refreshPokemonList(params!!.offset, params.limit)
+    override fun run(params: Void?): Flow<Result<Boolean>> {
+        return repository.refreshPokemonList()
     }
 }

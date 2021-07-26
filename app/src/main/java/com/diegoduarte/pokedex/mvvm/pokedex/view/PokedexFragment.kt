@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -20,7 +21,8 @@ import javax.inject.Inject
 
 class PokedexFragment : DaggerFragment() {
 
-
+    private var _binding: FragmentPokedexBinding? = null
+    private val binding get() = _binding!!
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -28,17 +30,17 @@ class PokedexFragment : DaggerFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
+        savedInstanceState: Bundle?): View? {
 
         // Inflate the layout for this fragment
-        val binding = FragmentPokedexBinding.inflate(inflater)
+        _binding = FragmentPokedexBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        (activity as AppCompatActivity?)!!.window.statusBarColor = context?.getColor(R.color.black_40)!!
 
         binding.pokedexList.setHasFixedSize(true)
         binding.pokedexList.setItemViewCacheSize(8)
-        val manager = binding.pokedexList.layoutManager as GridLayoutManager
         val adapter = PokedexAdapter( PokedexAdapter.OnClickListener{
             viewModel.displayPokemon(it)
         })
@@ -53,15 +55,6 @@ class PokedexFragment : DaggerFragment() {
             }
         })
 
-        binding.pokedexList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (!viewModel.loading && manager.findLastVisibleItemPosition() >= manager.itemCount - 9) {
-                    viewModel.nextPage()
-                }
-            }
-        })
-
         viewModel.navigateToSelectedPokemon.observe(viewLifecycleOwner,  {
             if ( null != it ) {
                 // Must find the NavController from the Fragment
@@ -72,6 +65,13 @@ class PokedexFragment : DaggerFragment() {
         })
         return binding.root
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.pokedexList.adapter = null
+        _binding?.unbind()
+        _binding = null
 
+
+    }
 
 }

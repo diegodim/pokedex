@@ -7,19 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import com.diegoduarte.pokedex.data.model.Pokemon
 import com.diegoduarte.pokedex.databinding.FragmentAboutBinding
+import com.diegoduarte.pokedex.databinding.FragmentPokemonBinding
 
 
 class AboutFragment : Fragment() {
 
 
-    private lateinit var binding: FragmentAboutBinding
-
+    private var _binding: FragmentAboutBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentAboutBinding.inflate(inflater)
+        _binding = FragmentAboutBinding.inflate(inflater)
         binding.lifecycleOwner = this
         arguments?.takeIf { it.containsKey(ARG_POKEMON) }?.apply {
             val pokemon: Pokemon? = getParcelable<Pokemon>(ARG_POKEMON)
@@ -28,5 +29,10 @@ class AboutFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding?.unbind()
+        _binding = null
 
+    }
 }

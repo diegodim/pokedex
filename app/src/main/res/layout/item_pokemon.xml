@@ -35,7 +35,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/pokemon_item_id"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:nameText="@{pokemon.name}"
+                app:nameText="@{pokemon.name.english}"
                 tools:text="Pokemon" />
 
             <TextView

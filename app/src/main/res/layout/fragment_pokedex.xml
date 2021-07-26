@@ -44,7 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:background="@android:color/transparent"
-                android:fitsSystemWindows="true"
                 android:theme="@style/Theme.PokeDex.AppBarOverlay"
                 app:elevation="0dp">
 
@@ -52,7 +51,6 @@
                     android:id="@+id/pokedex_collapse_bar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fitsSystemWindows="true"
                     app:collapsedTitleTextAppearance="@style/Theme.CollapsingToolbar.Collapsed"
                     app:expandedTitleTextAppearance="@style/Theme.CollapsingToolbar.Expanded"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">

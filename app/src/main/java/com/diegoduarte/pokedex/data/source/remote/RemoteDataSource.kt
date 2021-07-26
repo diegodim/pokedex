@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface RemoteDataSource {
 
-    fun refreshPokemonList(offset: Int, limit: Int): Flow<Result<Boolean>>
+    fun refreshPokemonList(): Flow<Result<Boolean>>
 
 }
