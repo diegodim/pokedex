@@ -10,6 +10,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.Downsampler
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.diegoduarte.pokedex.R
@@ -36,6 +37,7 @@ fun bindImage(imgView: ImageView, id: Int) {
         Glide.with(imgView.context)
             .load(url)
             .centerInside()
+            .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
             .set(Downsampler.DECODE_FORMAT, DecodeFormat.PREFER_RGB_565)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(imgView)

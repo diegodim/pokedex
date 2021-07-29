@@ -6,7 +6,7 @@ import com.diegoduarte.pokedex.data.source.remote.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 
-class RefreshData(val repository: PokedexRepository, scope: CoroutineScope):
+class RefreshPokemonList(val repository: PokedexRepository, scope: CoroutineScope):
     UseCase<Result<Boolean>, Void?>(scope) {
 
     override fun run(params: Void?): Flow<Result<Boolean>> {

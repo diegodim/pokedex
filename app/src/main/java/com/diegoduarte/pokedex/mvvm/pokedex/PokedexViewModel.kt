@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diegoduarte.pokedex.data.model.Pokemon
 import com.diegoduarte.pokedex.data.source.PokedexRepository
-import com.diegoduarte.pokedex.mvvm.pokedex.domain.RefreshData
+import com.diegoduarte.pokedex.mvvm.pokedex.domain.GetPokemonList
+import com.diegoduarte.pokedex.mvvm.pokedex.domain.RefreshPokemonList
 import com.diegoduarte.pokedex.utils.ApiStatus
 import javax.inject.Inject
 
@@ -14,10 +15,13 @@ class PokedexViewModel @Inject constructor(repository: PokedexRepository):
     ViewModel() {
 
 
-    private val refreshData = RefreshData(repository, viewModelScope)
 
+    private val refreshData = RefreshPokemonList(repository, viewModelScope)
+    private val getPokemonList = GetPokemonList(repository, viewModelScope)
 
-    val pokemonList = repository.listPokemon
+    private val _pokemonList = MutableLiveData<List<Pokemon>>()
+    val pokemonList: LiveData<List<Pokemon>>
+        get() = _pokemonList
     // The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<ApiStatus>()
     // The external immutable LiveData for the request status
@@ -33,16 +37,21 @@ class PokedexViewModel @Inject constructor(repository: PokedexRepository):
     init {
         _status.value = ApiStatus.LOADING
         refreshPokemon()
+        getPokemonList(
+            params = null,
+            onSuccess = { _pokemonList.value = it },
+            onError = { })
     }
 
     private fun refreshPokemon(){
 
         refreshData(
-            null,
+            params = null,
             onSuccess = {  },
             onError = {  }
         )
     }
+
 
 
     fun statusDone(){

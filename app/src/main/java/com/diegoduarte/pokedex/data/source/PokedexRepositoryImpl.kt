@@ -17,7 +17,7 @@ class PokedexRepositoryImpl @Inject constructor(
         return remoteDataSource.refreshPokemonList()
     }
 
-    override val listPokemon: LiveData<List<Pokemon>>
+    override val listPokemon: Flow<List<Pokemon>>
         get() = localDataSource.getListPokemon()
 
 

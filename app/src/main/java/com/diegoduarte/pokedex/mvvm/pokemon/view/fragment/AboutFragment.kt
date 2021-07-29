@@ -5,15 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.diegoduarte.pokedex.base.BaseFragment
 import com.diegoduarte.pokedex.data.model.Pokemon
 import com.diegoduarte.pokedex.databinding.FragmentAboutBinding
 import com.diegoduarte.pokedex.databinding.FragmentPokemonBinding
 
 
-class AboutFragment : Fragment() {
+class AboutFragment : BaseFragment<FragmentAboutBinding>() {
 
 
-    private var _binding: FragmentAboutBinding? = null
+    //private var _binding: FragmentAboutBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,10 +30,4 @@ class AboutFragment : Fragment() {
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding?.unbind()
-        _binding = null
-
-    }
 }

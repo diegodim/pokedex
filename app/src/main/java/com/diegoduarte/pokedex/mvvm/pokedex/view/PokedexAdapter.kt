@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.diegoduarte.pokedex.data.model.Pokemon
 import com.diegoduarte.pokedex.databinding.ItemPokemonBinding
 
-class PokedexAdapter( val onClickListener: OnClickListener ):
+class PokedexAdapter(private val onClickListener: OnClickListener ):
     ListAdapter<Pokemon, PokedexAdapter.PokemonViewHolder>(PokemonDiffCallback)  {
 
 
