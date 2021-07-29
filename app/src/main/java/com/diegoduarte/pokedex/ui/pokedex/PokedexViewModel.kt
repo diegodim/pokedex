@@ -1,4 +1,4 @@
-package com.diegoduarte.pokedex.mvvm.pokedex
+package com.diegoduarte.pokedex.ui.pokedex
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -6,9 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diegoduarte.pokedex.data.model.Pokemon
 import com.diegoduarte.pokedex.data.source.PokedexRepository
-import com.diegoduarte.pokedex.mvvm.pokedex.domain.GetPokemonList
-import com.diegoduarte.pokedex.mvvm.pokedex.domain.RefreshPokemonList
+import com.diegoduarte.pokedex.ui.pokedex.domain.GetPokemonList
+import com.diegoduarte.pokedex.ui.pokedex.domain.RefreshPokemonList
 import com.diegoduarte.pokedex.utils.ApiStatus
+import com.diegoduarte.pokedex.utils.Event
 import javax.inject.Inject
 
 class PokedexViewModel @Inject constructor(repository: PokedexRepository):
@@ -28,42 +29,31 @@ class PokedexViewModel @Inject constructor(repository: PokedexRepository):
     val status: LiveData<ApiStatus>
         get() = _status
 
-    private val _navigateToSelectedPokemon = MutableLiveData<Pokemon?>()
+    private val _openPokemonEvent = MutableLiveData<Event<Pokemon?>>()
 
     // The external immutable LiveData for the navigation property
-    val navigateToSelectedPokemon: LiveData<Pokemon?>
-        get() = _navigateToSelectedPokemon
+    val openPokemonEvent: LiveData<Event<Pokemon?>>
+        get() = _openPokemonEvent
 
     init {
         _status.value = ApiStatus.LOADING
         refreshPokemon()
         getPokemonList(
             params = null,
-            onSuccess = { _pokemonList.value = it },
+            onSuccess = {
+                _pokemonList.value = it
+                _status.value = ApiStatus.DONE },
             onError = { })
     }
 
     private fun refreshPokemon(){
-
-        refreshData(
-            params = null,
-            onSuccess = {  },
-            onError = {  }
-        )
+        refreshData(onError = { })
     }
 
 
-
-    fun statusDone(){
-        _status.value = ApiStatus.DONE
+    fun openPokemon(pokemon: Pokemon){
+        _openPokemonEvent.value = Event(pokemon)
     }
 
-    fun displayPokemon(pokemon: Pokemon){
-        _navigateToSelectedPokemon.value = pokemon
-    }
-
-    fun displayPokemonComplete(){
-        _navigateToSelectedPokemon.value = null
-    }
 
 }

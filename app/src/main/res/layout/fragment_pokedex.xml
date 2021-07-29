@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.diegoduarte.pokedex.mvvm.pokedex.PokedexViewModel" />
+            type="com.diegoduarte.pokedex.ui.pokedex.PokedexViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

@@ -1,10 +1,10 @@
-package com.diegoduarte.pokedex.mvvm.pokemon.view.adapter
+package com.diegoduarte.pokedex.ui.pokemon.view.adapter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.diegoduarte.pokedex.data.model.Pokemon
-import com.diegoduarte.pokedex.mvvm.pokemon.view.fragment.ARG_POKEMON
+import com.diegoduarte.pokedex.ui.pokemon.view.fragment.ARG_POKEMON
 
 class PokemonInfoAdapter(fragment: Fragment, private val pokemon: Pokemon): FragmentStateAdapter(fragment) {
 

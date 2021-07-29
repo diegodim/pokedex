@@ -1,4 +1,4 @@
-package com.diegoduarte.pokedex.mvvm
+package com.diegoduarte.pokedex.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

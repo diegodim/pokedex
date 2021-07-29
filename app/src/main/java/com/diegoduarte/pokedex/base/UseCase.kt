@@ -1,30 +1,35 @@
 package com.diegoduarte.pokedex.base
 
 
+import com.diegoduarte.pokedex.data.source.Result
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 
 abstract class UseCase<T, in Params>(private val scope: CoroutineScope) {
 
-    abstract fun run(params: Params? = null): Flow<T>
+    abstract fun run(params: Params? = null): Flow<Result<T>>
 
-    operator fun invoke(params: Params,
+    operator fun invoke(onSuccess: (T) -> Unit = {},
+                        onError: ((Throwable) -> Unit) = {}){
+        return invoke(null, onSuccess, onError)
+    }
+    operator fun invoke(params: Params?,
                onSuccess: (T) -> Unit = {},
-               onError: ((Throwable) -> Unit) = {}
-                ){
+               onError: ((Throwable) -> Unit) = {}){
         scope.launch(Dispatchers.IO) {
-            try {
-                run(params).collect {
+
+            run(params).collect {
+                if (it is Result.Success) {
                     withContext(Dispatchers.Main) {
-                        onSuccess(it)
+                        onSuccess(it.data)
                     }
                 }
-            }catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    onError(e)
+                else if (it is Result.Error) {
+                    onError(it.exception)
                 }
             }
+
 
         }
 

@@ -1,20 +1,17 @@
-package com.diegoduarte.pokedex.mvvm.pokedex.view
+package com.diegoduarte.pokedex.ui.pokedex.view
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.diegoduarte.pokedex.R
 import com.diegoduarte.pokedex.databinding.FragmentPokedexBinding
-import com.diegoduarte.pokedex.mvvm.pokedex.PokedexViewModel
+import com.diegoduarte.pokedex.ui.pokedex.PokedexViewModel
+import com.diegoduarte.pokedex.utils.EventObserver
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -30,7 +27,7 @@ class PokedexFragment : DaggerFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?): View {
 
         // Inflate the layout for this fragment
         _binding = FragmentPokedexBinding.inflate(inflater)
@@ -42,7 +39,7 @@ class PokedexFragment : DaggerFragment() {
         binding.pokedexList.setHasFixedSize(true)
         binding.pokedexList.setItemViewCacheSize(8)
         val adapter = PokedexAdapter( PokedexAdapter.OnClickListener{
-            viewModel.displayPokemon(it)
+            viewModel.openPokemon(it)
         })
         binding.pokedexList.adapter = adapter
 
@@ -50,17 +47,15 @@ class PokedexFragment : DaggerFragment() {
             list?.let {
                 if(it.isNotEmpty()) {
                     adapter.submitList(it)
-                    viewModel.statusDone()
                 }
             }
         })
 
-        viewModel.navigateToSelectedPokemon.observe(viewLifecycleOwner,  {
+        viewModel.openPokemonEvent.observe(viewLifecycleOwner,  EventObserver{
             if ( null != it ) {
                 // Must find the NavController from the Fragment
                 this.findNavController().navigate(PokedexFragmentDirections.actionPokedexFragmentToPokemonFragment(it))
                 // Tell the ViewModel we've made the navigate call to prevent multiple navigation
-                viewModel.displayPokemonComplete()
             }
         })
         return binding.root

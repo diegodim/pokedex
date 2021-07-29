@@ -4,44 +4,30 @@ import com.diegoduarte.pokedex.data.source.local.database.PokedexDao
 import com.diegoduarte.pokedex.data.source.local.mapper.PokemonEntityMapper
 import com.diegoduarte.pokedex.data.source.remote.mapper.PokemonResponseMapper
 import com.diegoduarte.pokedex.data.source.remote.service.WebServiceFactory
+import com.diegoduarte.pokedex.data.source.Result
+import com.diegoduarte.pokedex.data.source.remote.model.PokemonResponse
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
 
-class RemoteDataSourceImpl(
-    private val pokemonDao: PokedexDao): RemoteDataSource {
+class RemoteDataSourceImpl(): RemoteDataSource {
 
-    override fun refreshPokemonList() = flow{
+    override suspend fun refreshPokemonList(): Result<List<PokemonResponse>?> {
         try {
 
-
             val response = WebServiceFactory.service.getPokemonList()
-
             if(response.isSuccessful) {
                 val listPokemon = response.body()
-                listPokemon?.forEach {
-                    pokemonDao
-                        .insertAll(PokemonEntityMapper().toLocal(PokemonResponseMapper().toDomain(it)))
-                }
-
-                emit(Result.Success(response.isSuccessful))
-
+                return Result.Success(listPokemon)
             }
             else{
-                emit(Result.Error(Exception(response.errorBody().toString())))
+                return Result.Error(Exception(response.errorBody().toString()))
             }
         }catch (e: Exception){
-            emit(Result.Error(e))
             e.printStackTrace()
+            return Result.Error(e)
+
         }
 
     }
 
-
-    /*private suspend fun fetchPokemon(item: Iterable<PokedexResponse>): List<PokemonResponse> =
-        coroutineScope {
-            item.map { pokemon ->
-                async { // this will allow us to run multiple tasks in parallel
-                    WebServiceFactory.service.getPokemon(pokemon.url)
-                }
-            }.awaitAll()
-        }*/
 }

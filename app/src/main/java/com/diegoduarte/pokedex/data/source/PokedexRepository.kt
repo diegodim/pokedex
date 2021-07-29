@@ -1,12 +1,10 @@
 package com.diegoduarte.pokedex.data.source
 
-import androidx.lifecycle.LiveData
 import com.diegoduarte.pokedex.data.model.Pokemon
-import com.diegoduarte.pokedex.data.source.remote.Result
 import kotlinx.coroutines.flow.Flow
 
 interface PokedexRepository {
 
-    fun refreshPokemonList(): Flow<Result<Boolean>>
-    val listPokemon: Flow<List<Pokemon>>
+    fun refreshPokemonList(): Flow<Result<Nothing>>
+    val listPokemon: Flow<Result<List<Pokemon>>>
 }

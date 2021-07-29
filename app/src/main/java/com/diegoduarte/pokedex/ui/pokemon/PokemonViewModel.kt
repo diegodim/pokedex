@@ -1,7 +1,6 @@
-package com.diegoduarte.pokedex.mvvm.pokemon
+package com.diegoduarte.pokedex.ui.pokemon
 
 import androidx.lifecycle.ViewModel
-import com.diegoduarte.pokedex.data.model.Pokemon
 import com.diegoduarte.pokedex.data.source.PokedexRepository
 import javax.inject.Inject
 

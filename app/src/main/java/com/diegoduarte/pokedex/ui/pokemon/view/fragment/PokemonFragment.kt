@@ -1,4 +1,4 @@
-package com.diegoduarte.pokedex.mvvm.pokemon.view.fragment
+package com.diegoduarte.pokedex.ui.pokemon.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,10 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.diegoduarte.pokedex.R
-import com.diegoduarte.pokedex.databinding.FragmentPokedexBinding
 import com.diegoduarte.pokedex.databinding.FragmentPokemonBinding
-import com.diegoduarte.pokedex.mvvm.pokemon.PokemonViewModel
-import com.diegoduarte.pokedex.mvvm.pokemon.view.adapter.PokemonInfoAdapter
+import com.diegoduarte.pokedex.ui.pokemon.PokemonViewModel
+import com.diegoduarte.pokedex.ui.pokemon.view.adapter.PokemonInfoAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_pokemon.*
 import javax.inject.Inject

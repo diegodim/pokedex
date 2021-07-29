@@ -24,8 +24,7 @@ class ApplicationModule{
 
     @Singleton
     @Provides
-    fun provideRemoteDataSource(database: PokedexDatabase):
-            RemoteDataSource = RemoteDataSourceImpl(database.pokemonDao())
+    fun provideRemoteDataSource(): RemoteDataSource = RemoteDataSourceImpl()
 
     @Singleton
     @Provides

@@ -1,4 +1,4 @@
-package com.diegoduarte.pokedex.mvvm.pokedex.view
+package com.diegoduarte.pokedex.ui.pokedex.view
 
 
 

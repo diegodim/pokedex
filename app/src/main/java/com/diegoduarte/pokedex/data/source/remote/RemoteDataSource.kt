@@ -1,11 +1,12 @@
 package com.diegoduarte.pokedex.data.source.remote
 
-import androidx.lifecycle.LiveData
-import com.diegoduarte.pokedex.data.model.Pokemon
+
+import com.diegoduarte.pokedex.data.source.Result
+import com.diegoduarte.pokedex.data.source.remote.model.PokemonResponse
 import kotlinx.coroutines.flow.Flow
 
 interface RemoteDataSource {
 
-    fun refreshPokemonList(): Flow<Result<Boolean>>
+    suspend fun refreshPokemonList(): Result<List<PokemonResponse>?>
 
 }

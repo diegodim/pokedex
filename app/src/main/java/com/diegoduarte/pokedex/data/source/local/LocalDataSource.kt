@@ -1,11 +1,15 @@
 package com.diegoduarte.pokedex.data.source.local
 
-import androidx.lifecycle.LiveData
+
 import com.diegoduarte.pokedex.data.model.Pokemon
+import com.diegoduarte.pokedex.data.source.Result
+import com.diegoduarte.pokedex.data.source.local.entities.PokemonEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
+
 
 interface LocalDataSource {
 
-    fun getListPokemon(): Flow<List<Pokemon>>
+    fun getListPokemon(): Flow<Result<List<Pokemon>>>
+
+    suspend fun insertPokemon(pokemon: PokemonEntity)
 }

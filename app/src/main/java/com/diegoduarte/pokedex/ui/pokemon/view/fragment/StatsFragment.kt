@@ -1,4 +1,4 @@
-package com.diegoduarte.pokedex.mvvm.pokemon.view.fragment
+package com.diegoduarte.pokedex.ui.pokemon.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,8 +1,8 @@
 package com.diegoduarte.pokedex.di.module
 
 import androidx.lifecycle.ViewModel
-import com.diegoduarte.pokedex.mvvm.pokemon.view.fragment.PokemonFragment
-import com.diegoduarte.pokedex.mvvm.pokemon.PokemonViewModel
+import com.diegoduarte.pokedex.ui.pokemon.view.fragment.PokemonFragment
+import com.diegoduarte.pokedex.ui.pokemon.PokemonViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector

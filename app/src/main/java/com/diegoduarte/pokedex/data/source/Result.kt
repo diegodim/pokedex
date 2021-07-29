@@ -1,4 +1,4 @@
-package com.diegoduarte.pokedex.data.source.remote
+package com.diegoduarte.pokedex.data.source
 
 sealed class Result<out R> {
 
