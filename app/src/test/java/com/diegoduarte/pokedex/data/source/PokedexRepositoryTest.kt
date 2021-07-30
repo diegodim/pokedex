@@ -56,7 +56,7 @@ class PokedexRepositoryTest{
     }
 
     @Test
-    fun  refreshPokemon_requestAllPokemonFromRemoteDataSource() = testCoroutineRule.runBlockingTest{
+    fun  refreshPokemon_requestAllPokemonFromRemoteDataSource_saveOnLocalDataSource() = testCoroutineRule.runBlockingTest{
 
         // Given
         val pokemon = PokemonResponse()
