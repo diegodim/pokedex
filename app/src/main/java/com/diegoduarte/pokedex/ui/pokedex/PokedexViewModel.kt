@@ -38,18 +38,23 @@ class PokedexViewModel @Inject constructor(repository: PokedexRepository):
     init {
         _status.value = ApiStatus.LOADING
         refreshPokemon()
-        getPokemonList(
-            params = null,
-            onSuccess = {
-                _pokemonList.value = it
-                _status.value = ApiStatus.DONE },
-            onError = { })
+        getPokemonList()
     }
 
     private fun refreshPokemon(){
         refreshData(onError = { })
     }
 
+    private fun getPokemonList(){
+        getPokemonList(
+            onSuccess = {
+                if(it.isNotEmpty()) {
+                    _pokemonList.value = it
+                    _status.value = ApiStatus.DONE
+                }
+                        },
+            onError = { })
+    }
 
     fun openPokemon(pokemon: Pokemon){
         _openPokemonEvent.value = Event(pokemon)
