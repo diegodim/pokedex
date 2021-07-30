@@ -9,7 +9,7 @@ import com.diegoduarte.pokedex.data.source.local.database.DataConverter
 data class EvolutionEntity(
 
     val prev: List<String>? = null,
-    val next: List<List<String>>? = null,
+    val next: List<List<String>>? = null
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null

@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "stats")
-class StatsEntity (
+data class StatsEntity (
     val hp: Int? = null,
     val attack: Int? = null,
     val defense: Int? = null,

@@ -14,5 +14,5 @@ data class StatsResponse (
     @SerializedName("Sp. Defense")
     val spDefense: Int? = null,
     @SerializedName("Speed")
-    val speed: Int? = null,
+    val speed: Int? = null
 )

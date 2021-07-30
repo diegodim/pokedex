@@ -6,5 +6,5 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Evolution(
     val prev: List<String>? = null,
-    val next: List<List<String>>? = null,
+    val next: List<List<String>>? = null
 ): Parcelable

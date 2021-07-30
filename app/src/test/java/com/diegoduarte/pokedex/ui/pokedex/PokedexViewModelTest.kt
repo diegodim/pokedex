@@ -35,7 +35,8 @@ class PokedexViewModelTest {
     private lateinit var viewModel: PokedexViewModel
 
     @Test
-    fun loadAllPokemonFromRepository_loadingTogglesAndDataLoaded() {
+    fun loadAllPokemonFromRepository_loadingTogglesAndDataLoaded() =
+        testCoroutineRule.runBlockingTest{
         // Given
         val pokemons = listOf(
             Pokemon(),

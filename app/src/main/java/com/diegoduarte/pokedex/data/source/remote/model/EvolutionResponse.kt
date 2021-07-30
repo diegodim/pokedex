@@ -6,5 +6,5 @@ data class EvolutionResponse (
     @SerializedName("prev")
     val prev: List<String>? = null,
     @SerializedName("next")
-    val next: List<List<String>>? = null,
+    val next: List<List<String>>? = null
 )

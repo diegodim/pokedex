@@ -10,5 +10,5 @@ data class Stats(
     val defense: Int? = null,
     val spAttack: Int? = null,
     val spDefense: Int? = null,
-    val speed: Int? = null,
+    val speed: Int? = null
 ): Parcelable

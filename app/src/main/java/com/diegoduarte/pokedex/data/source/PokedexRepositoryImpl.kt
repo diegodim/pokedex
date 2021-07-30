@@ -23,7 +23,8 @@ class PokedexRepositoryImpl @Inject constructor(
         if (response is Result.Success) {
 
             response.data?.forEach {
-                localDataSource.insertPokemon(PokemonEntityMapper().toLocal(PokemonResponseMapper().toDomain(it)))
+                val value = PokemonEntityMapper().toLocal(PokemonResponseMapper().toDomain(it))
+                localDataSource.insertPokemon(value)
             }
             emit(Result.Loading)
         } else if (response is Result.Error) {
