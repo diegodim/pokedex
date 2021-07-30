@@ -11,7 +11,7 @@ import com.diegoduarte.pokedex.data.source.local.entities.*
     ProfileEntity::class,
     StatsEntity::class,
     PokemonEntity::class
-], version = 3, exportSchema = false)
+], version = 4, exportSchema = false)
 @TypeConverters(DataConverter::class)
 abstract class PokedexDatabase: RoomDatabase() {
 

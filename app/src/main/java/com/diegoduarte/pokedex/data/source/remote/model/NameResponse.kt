@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class NameResponse (
     @SerializedName("english")
-    val english: String
+    val english: String? = ""
 )

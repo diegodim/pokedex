@@ -5,5 +5,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Name (
-    val english: String
+    val english: String? = ""
 ): Parcelable

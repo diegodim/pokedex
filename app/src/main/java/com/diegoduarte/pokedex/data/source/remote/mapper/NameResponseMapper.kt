@@ -6,6 +6,6 @@ import com.diegoduarte.pokedex.data.source.remote.model.NameResponse
 
 class NameResponseMapper: BaseRemoteMapper<NameResponse?, Name?> {
     override fun toDomain(remote: NameResponse?)= Name (
-        english = remote!!.english
+        english = remote?.english
     )
 }

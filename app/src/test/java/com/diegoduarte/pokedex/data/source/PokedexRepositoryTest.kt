@@ -57,19 +57,10 @@ class PokedexRepositoryTest{
 
     @Test
     fun  refreshPokemon_requestAllPokemonFromRemoteDataSource() = testCoroutineRule.runBlockingTest{
+
         // Given
-        val pokemon = PokemonResponse(
-            id = 1,
-            name = NameResponse(""),
-            type = listOf(""),
-            base = StatsResponse(1,1,1,1,1,1),
-            evolution = EvolutionResponse(listOf(""), listOf(listOf(""))),
-            profile = ProfileResponse("","", listOf(""), listOf(listOf("")),"")
-        )
-        val pokemons = listOf(
-            pokemon,
-            pokemon,
-            pokemon)
+        val pokemon = PokemonResponse()
+        val pokemons = listOf(pokemon, pokemon, pokemon)
         val local = PokemonEntityMapper().toLocal(PokemonResponseMapper().toDomain(pokemon))
         given(remoteDataSource.refreshPokemonList()).willReturn(Result.Success(pokemons))
 
