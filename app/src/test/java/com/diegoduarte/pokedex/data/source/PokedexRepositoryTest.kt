@@ -2,6 +2,10 @@ package com.diegoduarte.pokedex.data.source
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.asLiveData
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ActivityScenario
+import androidx.test.core.app.ActivityScenario.launch
+import com.diegoduarte.pokedex.R
 import com.diegoduarte.pokedex.TestCoroutineRule
 import com.diegoduarte.pokedex.data.model.Pokemon
 import com.diegoduarte.pokedex.data.source.local.LocalDataSource
@@ -10,11 +14,13 @@ import com.diegoduarte.pokedex.data.source.local.mapper.PokemonEntityMapper
 import com.diegoduarte.pokedex.data.source.remote.RemoteDataSource
 import com.diegoduarte.pokedex.data.source.remote.mapper.PokemonResponseMapper
 import com.diegoduarte.pokedex.data.source.remote.model.*
+import com.diegoduarte.pokedex.ui.MainActivity
 import com.diegoduarte.pokedex.ui.pokedex.PokedexViewModel
 import com.example.android.architecture.blueprints.todoapp.getOrAwaitValue
 import junit.framework.Assert
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.core.Is
 import org.junit.Assert.*
 import org.junit.Before
@@ -44,8 +50,6 @@ class PokedexRepositoryTest{
     @get:Rule
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
-    @get:Rule
-    val testCoroutineRule = TestCoroutineRule()
 
     private lateinit var repository: PokedexRepository
 
@@ -56,7 +60,7 @@ class PokedexRepositoryTest{
     }
 
     @Test
-    fun  refreshPokemon_requestAllPokemonFromRemoteDataSource_saveOnLocalDataSource() = testCoroutineRule.runBlockingTest{
+    fun  refreshPokemon_requestAllPokemonFromRemoteDataSource_saveOnLocalDataSource() = runBlockingTest{
 
         // Given
         val pokemon = PokemonResponse()
@@ -75,5 +79,7 @@ class PokedexRepositoryTest{
         then(localDataSource).should(times(3)).insertPokemon(local)
 
     }
+
+
 
 }
