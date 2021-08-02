@@ -16,12 +16,13 @@ import com.diegoduarte.pokedex.databinding.FragmentPokemonBinding
 import com.diegoduarte.pokedex.ui.pokemon.PokemonViewModel
 import com.diegoduarte.pokedex.ui.pokemon.view.adapter.PokemonInfoAdapter
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_pokemon.*
 import javax.inject.Inject
 
 const val ARG_POKEMON = "pokemon"
 
-class PokemonFragment : Fragment() {
+class PokemonFragment : DaggerFragment() {
 
 
     private val args: PokemonFragmentArgs by navArgs()
@@ -56,7 +57,7 @@ class PokemonFragment : Fragment() {
         binding.pokemonPager.adapter = pageAdapter
 
         pageAdapter.addFragment(AboutFragment())
-        pageAdapter.addFragment(Fragment())
+        pageAdapter.addFragment(StatsFragment())
         pageAdapter.addFragment(Fragment())
         pageAdapter.addFragment(Fragment())
 
@@ -66,7 +67,7 @@ class PokemonFragment : Fragment() {
                 0 -> tab.text ="Sobre"
                 1 -> tab.text ="Status Base"
                 2 -> tab.text ="Evoluções"
-                3 -> tab.text ="Golpes"
+                3 -> tab.text ="Habilidades"
             }
         }
         tabLayoutMediator?.attach()

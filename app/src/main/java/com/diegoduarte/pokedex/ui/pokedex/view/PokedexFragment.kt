@@ -20,6 +20,7 @@ class PokedexFragment : DaggerFragment() {
 
     private var _binding: FragmentPokedexBinding? = null
     private val binding get() = _binding!!
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -34,31 +35,35 @@ class PokedexFragment : DaggerFragment() {
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        (activity as AppCompatActivity?)!!.window.statusBarColor = context?.getColor(R.color.black_40)!!
+        (activity as AppCompatActivity?)?.let {
+            it.window.statusBarColor = requireContext().getColor(R.color.black_40)
+        }
 
         binding.pokedexList.setHasFixedSize(true)
         binding.pokedexList.setItemViewCacheSize(8)
-        val adapter = PokedexAdapter( PokedexAdapter.OnClickListener{
+        val adapter = PokedexAdapter(PokedexAdapter.OnClickListener {
             viewModel.openPokemon(it)
         })
         binding.pokedexList.adapter = adapter
 
-        viewModel.pokemonList.observe(viewLifecycleOwner, { list->
+        viewModel.pokemonList.observe(viewLifecycleOwner, { list ->
             list?.let {
-                if(it.isNotEmpty()) {
+                if (it.isNotEmpty()) {
                     adapter.submitList(it)
                 }
             }
         })
 
-        viewModel.openPokemonEvent.observe(viewLifecycleOwner,  EventObserver{
-            if ( null != it ) {
+        viewModel.openPokemonEvent.observe(viewLifecycleOwner, EventObserver {
+            if (null != it) {
                 // Must find the NavController from the Fragment
-                this.findNavController().navigate(PokedexFragmentDirections.actionPokedexFragmentToPokemonFragment(it))
+                this.findNavController()
+                    .navigate(PokedexFragmentDirections.actionPokedexFragmentToPokemonFragment(it))
                 // Tell the ViewModel we've made the navigate call to prevent multiple navigation
             }
         })
         return binding.root
+
     }
     override fun onDestroyView() {
         super.onDestroyView()

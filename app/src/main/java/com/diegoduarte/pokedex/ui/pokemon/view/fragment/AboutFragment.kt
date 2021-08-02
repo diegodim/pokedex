@@ -11,8 +11,6 @@ import com.diegoduarte.pokedex.databinding.FragmentAboutBinding
 
 class AboutFragment : BaseFragment<FragmentAboutBinding>() {
 
-
-    //private var _binding: FragmentAboutBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,8 +20,8 @@ class AboutFragment : BaseFragment<FragmentAboutBinding>() {
         _binding = FragmentAboutBinding.inflate(inflater)
         binding.lifecycleOwner = this
         arguments?.takeIf { it.containsKey(ARG_POKEMON) }?.apply {
-            val pokemon: Pokemon? = getParcelable<Pokemon>(ARG_POKEMON)
-            binding.pokemon = pokemon
+            val pokemon: Pokemon? = getParcelable(ARG_POKEMON)
+            binding.profile = pokemon?.profile
         }
         return binding.root
     }

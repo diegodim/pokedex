@@ -1,6 +1,7 @@
 package com.diegoduarte.pokedex.di.module
 
 import androidx.lifecycle.ViewModel
+import com.diegoduarte.pokedex.di.scope.ViewModelKey
 import com.diegoduarte.pokedex.ui.pokedex.view.PokedexFragment
 import com.diegoduarte.pokedex.ui.pokedex.PokedexViewModel
 import dagger.Binds
@@ -13,12 +14,12 @@ abstract class PokedexModule {
 
 
     @ContributesAndroidInjector(modules = [
-        ViewModelBuilder::class
+        ViewModelModule::class
     ])
     internal abstract fun pokedexFragment(): PokedexFragment
 
     @Binds
     @IntoMap
     @ViewModelKey(PokedexViewModel::class)
-    abstract fun bindViewModel(viewmodel: PokedexViewModel): ViewModel
+    abstract fun bindViewModel(viewModel: PokedexViewModel): ViewModel
 }

@@ -20,10 +20,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:max="100"
+        android:indeterminate="false"
+        android:max="255"
         android:progress="50"
         app:indicatorColor="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,14 +35,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:fontFamily="@font/roboto_bold"
+        android:text="HP"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:text="HP" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/stat_value"
@@ -54,7 +51,7 @@
         android:textColor="@color/black"
         app:layout_constraintBaseline_toBaselineOf="@+id/stat_name"
         app:layout_constraintStart_toEndOf="@+id/stat_name"
-        tools:text="70" />
+        android:text="70" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -76,9 +76,6 @@ fun bindColorView(view: View, pokemon: Pokemon) {
 
 @BindingAdapter("colorContent")
 fun bindContent(view: CollapsingToolbarLayout, pokemon: Pokemon) {
-    pokemon.name!!.english?.let {
-        view.title = toUpperCase(it)
-    }
     pokemon.color.let {
         view.setContentScrimColor( view.context.getColor(it))
 

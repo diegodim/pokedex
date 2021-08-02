@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="pokemon"
-            type="com.diegoduarte.pokedex.data.model.Pokemon" />
+            name="profile"
+            type="com.diegoduarte.pokedex.data.model.Profile" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="16dp"
-                android:text="@{pokemon.profile.height}"
+                android:text="@{profile.height}"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/pokemon_height_label"
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="16dp"
-                android:text="@{pokemon.profile.weight}"
+                android:text="@{profile.weight}"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/pokemon_weight_label"

@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-object WebServiceFactory {
+class PokemonServiceBuilder {
     private val BASE_URL = "https://app.pokemon-api.xyz/"
 
     private val retrofit: Retrofit = Retrofit.Builder()
@@ -19,7 +19,7 @@ object WebServiceFactory {
     private fun provideOkHttpClient(): OkHttpClient {
 
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        interceptor.level = HttpLoggingInterceptor.Level.BASIC
 
         return OkHttpClient.Builder()
             .retryOnConnectionFailure(true)

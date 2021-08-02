@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.diegoduarte.pokedex.data.source.PokedexRepository
 import javax.inject.Inject
 
-class PokemonViewModel@Inject constructor(repository: PokedexRepository, ):
+class PokemonViewModel @Inject constructor(repository: PokedexRepository):
     ViewModel() {
 
 

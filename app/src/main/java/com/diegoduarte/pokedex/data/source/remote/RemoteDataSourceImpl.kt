@@ -1,20 +1,18 @@
 package com.diegoduarte.pokedex.data.source.remote
 
-import com.diegoduarte.pokedex.data.source.local.database.PokedexDao
-import com.diegoduarte.pokedex.data.source.local.mapper.PokemonEntityMapper
-import com.diegoduarte.pokedex.data.source.remote.mapper.PokemonResponseMapper
-import com.diegoduarte.pokedex.data.source.remote.service.WebServiceFactory
+import com.diegoduarte.pokedex.data.source.remote.service.PokemonServiceBuilder
 import com.diegoduarte.pokedex.data.source.Result
 import com.diegoduarte.pokedex.data.source.remote.model.PokemonResponse
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
+import com.diegoduarte.pokedex.data.source.remote.service.PokemonService
+import javax.inject.Inject
 
-class RemoteDataSourceImpl(): RemoteDataSource {
+class RemoteDataSourceImpl @Inject constructor(private val pokemonService: PokemonService):
+    RemoteDataSource {
 
     override suspend fun refreshPokemonList(): Result<List<PokemonResponse>?> {
         try {
 
-            val response = WebServiceFactory.service.getPokemonList()
+            val response = pokemonService.getPokemonList()
             if(response.isSuccessful) {
                 val listPokemon = response.body()
                 return Result.Success(listPokemon)
