@@ -1,39 +1,25 @@
 package com.diegoduarte.pokedex
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.*
 import org.junit.rules.TestRule
+import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
+import kotlin.coroutines.ContinuationInterceptor
 
 @ExperimentalCoroutinesApi
-class TestCoroutineRule : TestRule {
+class TestCoroutineRule : TestWatcher(), TestCoroutineScope by TestCoroutineScope() {
 
-    private val testCoroutineDispatcher = TestCoroutineDispatcher()
-    private val testCoroutineScope = TestCoroutineScope(testCoroutineDispatcher)
-
-    override fun apply(base: Statement, description: Description?) = object : Statement() {
-        @Throws(Throwable::class)
-        override fun evaluate() {
-            Dispatchers.setMain(testCoroutineDispatcher)
-
-            base.evaluate()
-
-            Dispatchers.resetMain()
-            testCoroutineScope.cleanupTestCoroutines()
-        }
+    override fun starting(description: Description?) {
+        super.starting(description)
+        Dispatchers.setMain(this.coroutineContext[ContinuationInterceptor] as CoroutineDispatcher)
     }
 
-    fun pauseDispatcher(){
-        testCoroutineScope.pauseDispatcher()
+    override fun finished(description: Description?) {
+        super.finished(description)
+        Dispatchers.resetMain()
     }
-
-    fun resumeDispatcher(){
-        testCoroutineScope.resumeDispatcher()
-    }
-
-    fun runBlockingTest(block: suspend TestCoroutineScope.() -> Unit) =
-        testCoroutineScope.runBlockingTest { block()  }
-
 }

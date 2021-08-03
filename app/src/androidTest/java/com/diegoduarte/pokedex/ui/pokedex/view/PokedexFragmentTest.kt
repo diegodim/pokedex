@@ -1,14 +1,14 @@
 package com.diegoduarte.pokedex.ui.pokedex.view
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ActivityScenario.launch
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.diegoduarte.pokedex.DaggerTestApplicationRule
@@ -19,19 +19,12 @@ import com.diegoduarte.pokedex.data.model.Profile
 import com.diegoduarte.pokedex.data.model.Stats
 import com.diegoduarte.pokedex.data.source.FakeTestAndroidRepository
 import com.diegoduarte.pokedex.data.source.PokedexRepository
-import com.diegoduarte.pokedex.data.source.Result
 import com.diegoduarte.pokedex.ui.MainActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 import org.junit.runner.RunWith
-import org.mockito.BDDMockito
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 import org.robolectric.annotation.LooperMode
 import org.robolectric.annotation.TextLayoutMode
 
@@ -69,9 +62,9 @@ class PokedexFragmentTest {
             ))
 
         launchActivity()
-        Espresso.onView(ViewMatchers.withText("Henrique")).perform(ViewActions.click())
-
-        Espresso.onView(ViewMatchers.withText("Henrique"))
+        //onView(ViewMatchers.withText("Henrique")).perform(ViewActions.click())
+        //onView(isRoot()).perform(ViewActions.pressBack());
+        onView(ViewMatchers.withText("Henrique"))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
     }

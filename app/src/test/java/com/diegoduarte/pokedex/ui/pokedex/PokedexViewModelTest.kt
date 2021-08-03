@@ -10,6 +10,7 @@ import com.example.android.architecture.blueprints.todoapp.getOrAwaitValue
 import junit.framework.Assert.assertNotNull
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -29,14 +30,14 @@ class PokedexViewModelTest {
     @get:Rule
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
+    @ExperimentalCoroutinesApi
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 
     private lateinit var viewModel: PokedexViewModel
 
     @Test
-    fun loadAllPokemonFromRepository_loadingTogglesAndDataLoaded() =
-        testCoroutineRule.runBlockingTest{
+    fun loadAllPokemonFromRepository_loadingTogglesAndDataLoaded() = testCoroutineRule.runBlockingTest {
         // Given
         val pokemons = listOf(
             Pokemon(),

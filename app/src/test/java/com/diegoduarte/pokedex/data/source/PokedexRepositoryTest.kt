@@ -50,6 +50,9 @@ class PokedexRepositoryTest{
     @get:Rule
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
+    @ExperimentalCoroutinesApi
+    @get:Rule
+    val testCoroutineRule = TestCoroutineRule()
 
     private lateinit var repository: PokedexRepository
 
@@ -60,7 +63,7 @@ class PokedexRepositoryTest{
     }
 
     @Test
-    fun  refreshPokemon_requestAllPokemonFromRemoteDataSource_saveOnLocalDataSource() = runBlockingTest{
+    fun  refreshPokemon_requestAllPokemonFromRemoteDataSource_saveOnLocalDataSource() =  testCoroutineRule.runBlockingTest{
 
         // Given
         val pokemon = PokemonResponse()
